@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">FOOD DETALIS</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+        {% if user.is_authenticated  %}
+        <a class="nav-item nav-link" href="#">Home</a>
+        {%  else %}
+
+        {% endif %}
+
+        {% if user.is_authenticated %}
+          <a class="nav-item nav-link" href="#">Hello, {{user.first_name}}</a>
+          <a class="nav-item nav-link" href="user/user_logout">Logout</a>
+        {% else %}
+          <a class="nav-item nav-link" href="user/user_register">Register</a>
+          <a class="nav-item nav-link" href="admin/admins_log">Admin</a>
+          <a class="nav-item nav-link" href="user/user_login">Login</a>
+         {% endif %}
+        </div>
+      </div>
+  </nav>
+  <br><br><br><br>
+  <div class="container item_grid">
+    {% if user.is_authenticated %}
+    <div class="row">
+    {% for info in info %}
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem;">
+          <img class="card-img-top max-width: 100%;" src="{{info.image.url}}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{info.name}}</h5>
+            <p class="card-text" style="text-align: justify;">{{info.description}}</p>
+          </div>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+    {% else %}
+
+    <h1 class="text-center">Want To See More Content ?<br></h1>
+    <p  style="padding-left: 500px;">Please Login To See the contents</p>
+    {% endif %}
+  </div>
+
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

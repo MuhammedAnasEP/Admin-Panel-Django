@@ -1,0 +1,129 @@
+<!-- {% load static %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+
+<style>
+      .searchbar{
+      margin-bottom: auto;
+      margin-top: auto;
+      height: 60px;
+      background-color: #023ab3;
+      border-radius: 30px;
+      padding: 10px;
+      }
+      .search_input{
+      color: rgb(255, 255, 255);
+      border: 0;
+      outline: 0;
+      background: none;
+      width: 0;
+      caret-color:transparent;
+      line-height: 40px;
+      transition: width 0.4s linear;
+      }
+  
+      .searchbar:hover > .search_input{
+      padding: 0 10px;
+      width: 200px;
+      caret-color:red;
+      transition: width 0.4s linear;
+      }
+  
+      .searchbar:hover > .search_icon{
+      background: rgb(255, 255, 255);
+      color: #ffffff;
+      }
+  
+      .search_icon{
+      height: 40px;
+      width: 40px;
+      float: right;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      color:rgb(255, 255, 255);
+      text-decoration:none;
+      }
+
+    
+  </style>
+<body>
+  <!-- {% csrf_token %} -->
+  <nav class="navbar navbar-expand-lg" style="background-color: rgb(77, 184, 255) ;background: linear-gradient(242deg, rgba(14,18,102,1) 0%, rgba(121,9,83,1) 100%, rgba(0,212,255,1) 100%);">
+      <a class="navbar-brand" href="#" style="color: white;">Admin Panel</a>
+      <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button> -->
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" style="color: white;" href="admins_inse">Insert</a>
+            <a class="nav-item nav-link" style="color: white;" href="admins_logout">Logout</a>
+            
+        </div>
+      </div>
+      <nav class="navbar navbar-light  ms-auto" >
+        <form method="post">
+           {%csrf_token%}
+            <div class="container h-100">
+              <div class="d-flex justify-content-center h-100">
+                <div class="searchbar">
+                  <input class="search_input"  type="search" name="s" placeholder="Search By First Name">
+                  <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                </div>
+              </div>
+            </div>
+        </form>
+      </nav>
+  </nav>
+  
+  <table class="table table-borderless">
+    <thead class="table-light">
+      <tr>
+        <!-- {% comment %} <th scope="col">Id</th> {% endcomment %} -->
+        <th scope="col"> </th>
+        <th scope="col">User Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <!-- <th scope="col">Status</th> -->
+        <!-- {% comment %} <th scope="col">Password</th> {% endcomment %} -->
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for dis in details %}
+      <tr class="table-light text-dark ">
+        <td></td>
+        <td >{{dis.username}}</td>
+        <td>{{dis.email}}</td>
+        <td>{{dis.first_name}}</td>
+        <td>{{dis.last_name}}</td>
+        <!-- {% if dis.is_superuser %}
+        <td><div class="bg-success rounded-pill text-light" style="width: 60px; height: 27px; text-align:center;">{{dis.is_superuser}}</div></td>
+        {% else %}
+        <td><div class="bg-danger rounded-pill text-light" style="width: 60px; height: 27px; text-align:center;">{{dis.is_superuser}}</div></td>
+        {% endif %} -->
+        <td><a href="admins_edit/{{dis.id}}"><button type="button" class="btn btn-primary rounded-pill">Edit</button></a></td>
+        <td><a href="admins_delete/{{dis.id}}" onclick="return confirm('confirm your process')"><button type="button" class="btn btn-warning rounded-pill">Delete</button></a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
